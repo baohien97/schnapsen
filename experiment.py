@@ -15,15 +15,17 @@ This is a simple question to answer, we simply build rand bots for a range of pa
 combination. We plot the results in a heat map
 
 """
+
 import matplotlib as mpl
 mpl.use('Agg')
 from matplotlib import pyplot as plt
 from api import State, util
 
 import random
-
+#print str(random.random())
 # Define the bot:
 # (we're not using it with the command line tools, so we can just put it here)
+
 class Bot:
 
     # Probability of moving with non-trump cards
@@ -32,15 +34,16 @@ class Bot:
         self.__non_trump_move = non_trump_move
 
     def get_move(self, state):
-
         if random.random() < self.__non_trump_move:
 
             # IMPLEMENT: Make the best non-trump move you can. Use the best_non_trump_card method written below.
-            pass
+            return str(best_non_trump_card(state))
 
         #IMPLEMENT: Make a random move (but exclude the best non-trump move from above)
-        pass
-
+        move1 = random.random()
+        move2 = random.random()
+        while (move1, move2) != best_non_trump_card(state):
+            return str((move1, move2))
 
 def empty(n):
     """
@@ -122,7 +125,6 @@ for i in range(STEPS):
                     won_by_2[i][j] += points
 
         print('finished {} vs {}'.format(inc * i, inc * j))
-
 
 
 # This
