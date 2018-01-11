@@ -55,7 +55,7 @@ class Bot:
 
             # IMPLEMENT: Add a recursive function call so that 'value' will contain the
             # minimax value of 'next_state'
-            value, m = self.value(next_state, depth=0)
+            value, _ = self.value(next_state, self.__max_depth)
 
             if maximizing(state):
                 if value > best_value:
