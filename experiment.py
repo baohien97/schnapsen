@@ -40,10 +40,15 @@ class Bot:
             return str(best_non_trump_card(state))
 
         #IMPLEMENT: Make a random move (but exclude the best non-trump move from above)
-        move1 = random.random()
-        move2 = random.random()
-        while (move1, move2) != best_non_trump_card(state):
-            return str((move1, move2))
+        else:
+            (m1, m2) = best_non_trump_card(state)
+            while (m1,m2) == best_non_trump_card(state):
+                (m1, m2) = (random.random(), random.random())
+            return str((m1, m2))
+
+
+
+
 
 def empty(n):
     """
