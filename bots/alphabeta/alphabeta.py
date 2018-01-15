@@ -47,7 +47,7 @@ class Bot:
         for move in moves:
 
             next_state = state.next(move)
-            value, _ = self.value(next_state, depth=self.__max_depth)
+            value, _ = self.value(next_state, depth=depth+1)
 
             if maximizing(state):
                 if value > best_value:

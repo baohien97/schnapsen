@@ -15,7 +15,7 @@ class Bot:
     def __init__(self, randomize=True, depth=4):
         """
         :param randomize: Whether to select randomly from moves of equal value (or to select the first always)
-        :param depth:
+        :param depth: how deep we are in the tree
         """
         self.__randomize = randomize
         self.__max_depth = depth
@@ -55,7 +55,7 @@ class Bot:
 
             # IMPLEMENT: Add a recursive function call so that 'value' will contain the
             # minimax value of 'next_state'
-            value, _ = self.value(next_state, self.__max_depth)
+            value, _ = self.value(next_state, depth+1)
 
             if maximizing(state):
                 if value > best_value:
