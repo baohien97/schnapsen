@@ -196,6 +196,7 @@ class State:
 		return winner, points
 
 	def moves(self):
+	    # type: () -> object
         """
         :robject
         :return: A list of all the legal moves that can be made by the player whose turn it is.

@@ -31,7 +31,7 @@ class Bot:
         # All legal moves
         moves = state.moves()
 
-        moves.sort(key=key(x))
+        #moves.sort(key= lambda x, x[0]%5)
 
         # Return most valuable card first
         return moves[0]
