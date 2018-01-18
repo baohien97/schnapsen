@@ -82,7 +82,7 @@ def best_non_trump_card(state):
     for move in lowest_suit_moves:
         if move[0] is not None and move[0] % 5 <= chosen_move[0] % 5:
             chosen_move = move
-
+    #print moves
     return chosen_move
 
 # For experiments, it's good to have repeatability, so we set the seed of the random number generator to a known value.
