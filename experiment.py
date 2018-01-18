@@ -43,7 +43,7 @@ class Bot:
         else:
             (m1, m2) = best_non_trump_card(state)
             while (m1,m2) == best_non_trump_card(state):
-                (m1, m2) = (random.random(), random.random())
+                (m1, m2) = random.choice(state.moves())
             return str((m1, m2))
 
 
@@ -82,7 +82,7 @@ def best_non_trump_card(state):
     for move in lowest_suit_moves:
         if move[0] is not None and move[0] % 5 <= chosen_move[0] % 5:
             chosen_move = move
-
+    #print moves
     return chosen_move
 
 # For experiments, it's good to have repeatability, so we set the seed of the random number generator to a known value.
