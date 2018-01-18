@@ -43,7 +43,7 @@ class Bot:
         else:
             (m1, m2) = best_non_trump_card(state)
             while (m1,m2) == best_non_trump_card(state):
-                (m1, m2) = (random.random(), random.random())
+                (m1, m2) = random.choice(state.moves())
             return str((m1, m2))
 
 
