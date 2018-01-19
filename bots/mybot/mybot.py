@@ -30,8 +30,17 @@ class Bot:
 
         # All legal moves
         moves = state.moves()
+        random.shuffle(moves)
 
-        #moves.sort(key= lambda x, x[0]%5)
+        for index, move in enumerate(moves):
+
+            if move[0]%5 == 0:
+                return move
+
+        for index, move in enumerate(moves):
+
+            if move[0]%3 == 0:
+                return move
 
         # Return most valuable card first
-        return moves[0]
+        return random.choice(moves)
