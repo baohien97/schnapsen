@@ -404,7 +404,7 @@ class KB(object):
 
     def add_clause(self, *symbols):
         """
-        Adds a clause. A clause is a disjunction of atomic symbols or theiur negations. For instance:
+        Adds a clause. A clause is a disjunction of atomic symbols or their negations. For instance:
         ```
             A = Symbol('A')
             B = Symbol('B')
