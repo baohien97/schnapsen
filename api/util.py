@@ -6,7 +6,7 @@ import math, sys, os
 import traceback
 import importlib
 from api import Deck
-
+import numpy as np
 
 def other(
         player_id # type: int
@@ -86,3 +86,10 @@ def ratio_points(state, player):
 
 def difference_points(state, player):
     return state.get_points(player) - state.get_points(other(player))
+
+"""
+def difference_to_win(state, player):
+    difference = 66 - float(state.get_points(player))
+    #print(difference)
+    return difference if difference <= 66 else 0
+"""

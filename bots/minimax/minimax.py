@@ -7,6 +7,8 @@
 from api import State, util
 import random
 
+import numpy as np
+
 class Bot:
 
     __max_depth = -1
@@ -58,7 +60,7 @@ class Bot:
             # IMPLEMENT: Add a recursive function call so that 'value' will contain the
             # minimax value of 'next_state'
             value, _ = self.value(next_state, depth+1)
-
+            #print value
             if maximizing(state):
                 if value > best_value:
                     best_value = value
@@ -88,4 +90,10 @@ def heuristic(state):
     :param state:
     :return: A heuristic evaluation for the given state (between -1.0 and 1.0)
     """
-    return util.ratio_points(state, 1) * 2.0 - 1.0, None
+    #return util.ratio_points(state, 1) * 2.0 - 1.0, None
+    return sigmoid_heuristic(state)
+
+def sigmoid_heuristic(state):
+    sigmoid_function = float(1)/float(1 + np.e**-(util.difference_points(state, 1)))
+    #print(sigmoid_function)
+    return sigmoid_function*2 - 1, None

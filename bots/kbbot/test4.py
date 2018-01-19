@@ -25,6 +25,7 @@ J16 = Boolean('j16')
 J17 = Boolean('j17')
 J18 = Boolean('j18')
 J19 = Boolean('j19')
+
 PJ0 = Boolean('pj0')
 PJ1 = Boolean('pj1')
 PJ2 = Boolean('pj2')
@@ -55,6 +56,7 @@ kb.add_clause(J4)
 kb.add_clause(J9)
 kb.add_clause(J14)
 kb.add_clause(J19)
+
 # Add here whatever is needed for your strategy.
 
 # DEFINITION OF THE STRATEGY
@@ -69,9 +71,11 @@ kb.add_clause(~PJ4, J4)
 kb.add_clause(~PJ9, J9)
 kb.add_clause(~PJ14, J14)
 kb.add_clause(~PJ19, J19)
+
 # Add here other strategies
 
-kb.add_clause(~PJ4)
+#kb.add_clause(~PJ4)
+
 # Print all models of the knowledge base
 for model in kb.models():
     print model

@@ -1,4 +1,4 @@
-import kb, sys
+#import kb, syss
 from kb import KB, Boolean, Integer, Constant
 
 # Define our integer symbols
@@ -14,10 +14,10 @@ d = x + y > -5
 kb = KB()
 
 kb.add_clause(q)
-kb.add_clause(???)
-kb.add_clause(???)
-kb.add_clause(???)
-kb.add_clause(???)
+kb.add_clause(a, c)
+kb.add_clause(~a, b)
+kb.add_clause(~c, d)
+#kb.add_clause()
 
 for model in kb.models():
     print model

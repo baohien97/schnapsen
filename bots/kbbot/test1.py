@@ -6,6 +6,7 @@ A = Boolean('A')
 B = Boolean('B')
 C = Boolean('C')
 D = Boolean('D')
+
 # Create a new knowledge base
 kb = KB()
 
@@ -18,6 +19,7 @@ kb.add_clause(B, ~C)
 # add a clause that makes kb unsat
 kb.add_clause(~C)
 
+print "Question 1's output:"
 
 # Print all models of the knowledge base
 for model in kb.models():
@@ -37,6 +39,7 @@ kb2.add_clause(~B, A)
 kb2.add_clause(~A, C)
 kb2.add_clause(~A, D)
 
+print("\nQuestion 2's output:")
 for model in kb2.models():
     print model
 
