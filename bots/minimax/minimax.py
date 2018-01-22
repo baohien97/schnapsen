@@ -94,6 +94,6 @@ def heuristic(state):
     return sigmoid_heuristic(state)
 
 def sigmoid_heuristic(state):
-    sigmoid_function = float(1)/float(1 + np.e**-(util.difference_points(state, 1)))
+    sigmoid_function = float(1)/float(1 + np.exp(0-util.difference_points(state, 1)))
     #print(sigmoid_function)
-    return sigmoid_function*2 - 1, None
+    return sigmoid_function, None
