@@ -89,9 +89,5 @@ def heuristic(state):
     :return: A heuristic evaluation for the given state (between -1.0 and 1.0)
     """
     #return util.ratio_points(state, 1) * 2.0 - 1.0, None
-    return sigmoid_heuristic(state)
+    return util.ratio_difference_points(state, 1) * 2.0 - 1.0, None
 
-def sigmoid_heuristic(state):
-    sigmoid_function = float(1)/float(1 + np.e**-(util.difference_points(state, 1)))
-    #print(sigmoid_function)
-    return sigmoid_function*2 - 1, None
