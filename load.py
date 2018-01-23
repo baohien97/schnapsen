@@ -52,13 +52,11 @@ def general_information(kb):
     kb.add_clause(J9)
     kb.add_clause(J14)
     kb.add_clause(J19)
-
     #Queens
     kb.add_clause(J3)
     kb.add_clause(J8)
     kb.add_clause(J13)
     kb.add_clause(J18)
-    
     #Kings
     kb.add_clause(J2)
     kb.add_clause(J7)
@@ -79,7 +77,6 @@ def strategy_knowledge(kb):
     kb.add_clause(~PJ9, J9)
     kb.add_clause(~PJ14, J14)
     kb.add_clause(~PJ19, J19)
-
     #Queens
     kb.add_clause(~J3, PJ3)
     kb.add_clause(~J8, PJ8)
@@ -89,7 +86,6 @@ def strategy_knowledge(kb):
     kb.add_clause(~PJ8, J8)
     kb.add_clause(~PJ13, J13)
     kb.add_clause(~PJ18, J18)
-
     #Kings
     kb.add_clause(~J2, PJ2)
     kb.add_clause(~J7, PJ7)
