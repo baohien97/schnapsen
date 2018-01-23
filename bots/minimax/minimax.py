@@ -92,7 +92,7 @@ def heuristic(state):
     """
     #return util.ratio_points(state, 1) * 2.0 - 1.0, None
     #print(util.ratio_difference_points(state, 1) * 2.0 - 1.0)
-    return util.ratio_difference_points(state, 1)*2.0 - 1, None
+    return util.ratio_difference_points(state, 1), None
 
 '''
 def sigmoid_heuristic(state):

@@ -94,6 +94,25 @@ def difference_to_win(state, player):
     return difference if difference <= 66 else 0
 """
 def ratio_difference_points(state, player):
+    return float(difference_points(state,player)/float((state.get_points(player) + state.get_points(other(player)))))
+
+    '''
+    return ratio_points(state, player) - ratio_points(state,player)*(difference_points(state,player)/float((state.get_points(player) + state.get_points(other(player)))))
+    '''
+    '''
+    if state.get_points(player) >= state.get_points(other(player)):
+        return pow(float(difference_points(state,player)/float(66)), ratio_points(state, player))
+    return 0 - pow((0 - float(difference_points(state,player))/float(66)), ratio_points(state, player))
+    '''
+
+    '''
+    if state.get_points(player) >= state.get_points(other(player)):
+        return float(pow(ratio_points(state,player), float(difference_points(state, player)/float(66))))
+    return float(pow(ratio_points(state, player), 0 - float(difference_points(state, player)/float(66))) - 1)
+    '''
+
+    '''
     if state.get_points(player) >= state.get_points(other(player)):
         return ratio_points(state, player) + ratio_points(state,player)*(difference_points(state,player)/float((state.get_points(player) + state.get_points(other(player)))))
-    return 0 - (ratio_points(state, other(player)) + ratio_points(state, other(player)*(difference_points(state, other(player))/float((state.get_points(player) + state.get_points(other(player)))))))
+    return ratio_points(state, other(player)) + ratio_points(state, other(player))*(difference_points(state, player)/float((state.get_points(player) + state.get_points(other(player)))))
+    '''
