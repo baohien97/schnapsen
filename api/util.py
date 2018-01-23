@@ -94,4 +94,6 @@ def difference_to_win(state, player):
     return difference if difference <= 66 else 0
 """
 def ratio_difference_points(state, player):
-    return ratio_points(state,player)-ratio_points(state,player)*(difference_points(state,player)/float(66))
+    if state.get_points(player) >= state.get_points(other(player)):
+        return ratio_points(state, player) + ratio_points(state,player)*(difference_points(state,player)/float((state.get_points(player) + state.get_points(other(player)))))
+    return 0 - (ratio_points(state, other(player)) + ratio_points(state, other(player)*(difference_points(state, other(player))/float((state.get_points(player) + state.get_points(other(player)))))))
