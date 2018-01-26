@@ -72,6 +72,7 @@ kb.add_clause(~PJ19, J19)
 # Add here other strategies
 
 kb.add_clause(~PJ4)
+
 # Print all models of the knowledge base
 for model in kb.models():
     print model

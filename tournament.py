@@ -9,6 +9,7 @@ python play.py -h
 from argparse import ArgumentParser
 from api import State, util, engine
 import random
+from bots import kbbot
 
 def run_tournament(options):
 
@@ -65,7 +66,8 @@ if __name__ == "__main__":
     parser.add_argument("-p", "--players",
                         dest="players",
                         help="Comma-separated list of player names (enclose with quotes).",
-                        default="rand,bully,rdeep")
+                        default="rand,bully,rdeep,kbbot")
+                        #default="rand,bully,rdeep")
 
     parser.add_argument("-r", "--repeats",
                         dest="repeats",
