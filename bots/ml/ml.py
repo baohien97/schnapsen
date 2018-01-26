@@ -55,7 +55,7 @@ class Bot:
             # IMPLEMENT: Add a function call so that 'value' will
             # contain the predicted value of 'next_state'
             # NOTE: This is different from the line in the minimax/alphabeta bot
-            value = self.value(next_state)
+            value = self.heuristic(next_state)
 
             if maximizing(state):
                 if value > best_value:
@@ -157,7 +157,7 @@ def features(state):
     feature_set.append(leader)
 
     # Add whose turn it is to feature set
-    whose_turn = state.whose_turn();
+    whose_turn = state.whose_turn()
     feature_set.append(whose_turn)
 
     # Add opponent's played card to feature set
