@@ -19,7 +19,7 @@ from bots.rdeep import rdeep
 from bots.ml.ml import features
 
 # How many games to play
-GAMES = 100
+GAMES = 100 # the bigger the longer it takes!
 
 # Which phase the game starts in
 PHASE = 1
