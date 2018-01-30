@@ -48,7 +48,10 @@ class Bot:
         load.general_information(kb)
 
         # Add the necessary knowledge about the strategy
-        load.strategy_knowledge(kb)
+        if state.__leads_turn:
+            load.strategy_marriages()
+        else:
+            load.strategy_knowledge(kb)
 
         # This line stores the index of the card in the deck.
         # If this doesn't make sense, refer to _deck.py for the card index mapping
