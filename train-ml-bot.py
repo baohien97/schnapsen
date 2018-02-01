@@ -19,7 +19,7 @@ from bots.bully import bully
 from bots.ml.ml import features
 
 # How many games to play
-GAMES = 600 # the bigger the longer it takes!
+GAMES = 700 # the bigger the longer it takes!
 
 # Which phase the game starts in
 PHASE = 1

@@ -11,7 +11,8 @@ from sklearn.externals import joblib
 
 # Path of the model we will use. If you make a model
 # with a different name, point this line to its path.
-DEFAULT_MODEL = os.path.dirname(os.path.realpath(__file__)) + '/model-rand.pkl'
+DEFAULT_MODEL = os.path.dirname(os.path.realpath(__file__)) + '/model-rdeep.pkl'
+
 
 class Bot:
 
@@ -103,6 +104,7 @@ def features(state):
     :return: A tuple of floats: a feature vector representing this state.
     """
 
+
     feature_set = []
 
     perspective = state.get_perspective()
@@ -121,42 +123,59 @@ def features(state):
     
     # get current user's hand
     player1_hand = state.hand()
-    '''
-    # get all legal moves
-    player1_moves = state.moves()
-    player1_next_state = []
 
-    # get current user's next possible states
-    for move in player1_moves: 
-        player1_next_state.append(state.next(move))'''
 
     # likelihood of getting a trump marriage based on current perspective
-
     likelihood = 0
 
+    to_be_drawn = state.get_stock_size()
     unknown_cards = [ind for ind,card in enumerate(perspective) if card == -1]
 
-    known_cards = [ind for ind,card in enumerate(perspective) if card != 0 and card != -1] 
+    '''
+    known_cards = [ind for ind,card in enumerate(perspective) if card != 0 and card != -1] '''
+
     trump_suit = state.get_trump_suit()
     
+    
     trump_k_or_q = 0
-    #trump_partner = 
+
     for i in player1_hand:
         if (Deck.get_rank(card) == 'K' or Deck.get_rank(card) == 'Q') and Deck.get_suit(card) == trump_suit:
             trump_k_or_q += 1
     
-    trump_partner = -1
-    if trump_k_or_q != 2:
-        if (Deck.get_rank(card) == 'K' or Deck.get_rank(card) == 'Q') and Deck.get_suit(card) == trump_suit:
-            trump_partner = int(card)
-            for card in known_cards:
-                if card == trump_partner + 1:
-                    likelihood = 0
-            for card in unknown_cards:
-                if card == trump_partner + 1:
-                    likelihood = float(1/len(unknown_cards))
-        elif trump_k_or_q == 0:
-            likelihood = 0            
+    if trump_k_or_q == 2:
+        likelihood = 1
+    
+    # ugly af
+    elif trump_k_or_q == 1:
+        for card in player1_hand:
+            if Deck.get_rank(card) == 'K' and Deck.get_suit(card) == trump_suit:
+                if (card+1) in unknown_cards:
+                    likelihood = float(to_be_drawn/len(unknown_cards))
+            elif Deck.get_rank(card) == 'Q' and Deck.get_suit(card) == trump_suit:
+                if (card-1) in unknown_cards:
+                    likelihood = float(to_be_drawn/len(unknown_cards))
+    else:
+        for card in unknown_cards:
+            if Deck.get_rank(card) == 'K' and Deck.get_suit(card) == trump_suit and (card + 1) in unknown_cards:
+                likelihood = float(to_be_drawn/len(unknown_cards))**2
+            elif Deck.get_rank(card) == 'Q' and Deck.get_suit(card) == trump_suit and (card - 1) in unknown_cards:
+                likelihood = float(to_be_drawn/len(unknown_cards))**2
+                
+
+    '''
+    trump_card = state.__deck.get_trump_card_index()
+    if Deck.get_rank(trump_card) == 'K' and (trump_card + 1) in unknown_cards:
+        
+        # very thoughtless here but will leave it for now
+        likelihood = float(1/len(unknown_cards))
+    elif Deck.get_rank(trump_card) == 'Q' and (trump_card - 1) in unknown_cards:
+        likelihood = float(1/len(unknown_cards))
+    else:
+        for card in unknown_cards:
+            if (Deck.get_rank(card) == 'K' and (card+1) in  unknown_cards) or (Deck.get_rank(card) == 'Q' and (card-1) in unknown_cards):
+                likelihood = float(to_be_drawn/len(unknown_cards))**2
+    '''
     feature_set.append(likelihood)
 
     # Add player 1's points to feature set
