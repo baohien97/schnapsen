@@ -17,7 +17,7 @@ from bots.rand import rand
 from bots.rdeep import rdeep
 from bots.bully import bully
 from bots.ml.ml import features
-
+from bots.ml import ml
 # How many games to play
 GAMES = 700 # the bigger the longer it takes!
 
@@ -26,7 +26,7 @@ PHASE = 1
 
 # The player we'll observe
 #player = rand.Bot()
-player = rdeep.Bot()
+player = ml.Bot()
 
 data = []
 target = []
@@ -83,6 +83,6 @@ for str in target:
 print('instances per class: {}'.format(count))
 
 # Store the model in the ml directory
-joblib.dump(model, './bots/ml/model-rdeep.pkl')
+joblib.dump(model, './bots/ml/model-ml.pkl')
 
 print('Done')
