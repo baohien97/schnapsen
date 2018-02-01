@@ -21,7 +21,7 @@ def call_engine(options):
     player2 = util.load_player(options.player2)
 
     # Generate or load the map
-    state = State.generate(phase=int(options.phase), project=True)
+    state = State.generate(phase=int(options.phase))
 
     if not options.quiet:
         # print('-- Using map with id {} '.format(id))

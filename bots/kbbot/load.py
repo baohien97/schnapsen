@@ -48,28 +48,28 @@ def general_information(kb):
     # This adds information which cards are Jacks
     # Add here whatever is needed for your strategy.
     #Jacks
-    kb.add_clause(J4)
-    kb.add_clause(J9)
-    kb.add_clause(J14)
-    kb.add_clause(J19)
+    kb.add_clause(J4)   #cloves
+    kb.add_clause(J9)   #diamomds
+    kb.add_clause(J14)  #hearts
+    kb.add_clause(J19)  #spades
 
     #Queens
-    kb.add_clause(J3)
-    kb.add_clause(J8)
-    kb.add_clause(J13)
-    kb.add_clause(J18)
+    kb.add_clause(J3)   #cloves
+    kb.add_clause(J8)   #diamonds
+    kb.add_clause(J13)  #hearts
+    kb.add_clause(J18)  #spades
     
     #Kings
-    kb.add_clause(J2)
-    kb.add_clause(J7)
-    kb.add_clause(J12)
-    kb.add_clause(J17)
+    kb.add_clause(J2)   #cloves
+    kb.add_clause(J7)   #diamonds
+    kb.add_clause(J12)  #hearts
+    kb.add_clause(J17)  #spades
 
 def strategy_knowledge(kb):
-    # DEFINITION OF THE STRATEGY
-    # Add clauses (This list is sufficient for this strategy)
-    # PJ is the strategy to play jacks first, so all we need to model is all x PJ(x) <-> J(x),
-    # In other words that the PJ strategy should play a card when it is a jack
+    #CHEAP CARD STRATEGY
+    # Cheap card strategy is the strategy to play cheap cards first (Jacks, Kings, Queens),
+    # all x PJ(x) <-> J(x) (for every cheap card in had, play that card)
+
     # Jacks
     kb.add_clause(~J4, PJ4)
     kb.add_clause(~J9, PJ9)
@@ -99,3 +99,36 @@ def strategy_knowledge(kb):
     kb.add_clause(~PJ7, J7)
     kb.add_clause(~PJ12, J12)
     kb.add_clause(~PJ17, J17)
+
+
+
+def strategy_marriages(kb):
+    #MARRIAGE STRATEGY
+
+    # Marriage Cloves
+    kb.add_clause(~J2, ~J3, PJ2, PJ3)
+    kb.add_clause(J2, ~PJ2)
+    kb.add_clause(J3, ~PJ2)
+    kb.add_clause(J2, ~PJ3)
+    kb.add_clause(J3, ~PJ3)
+
+    # Marriage Diamonds
+    kb.add_clause(~J7, ~J8, PJ7, PJ8)
+    kb.add_clause(J7, ~PJ7)
+    kb.add_clause(J8, ~PJ7)
+    kb.add_clause(J7, ~PJ8)
+    kb.add_clause(J8, ~PJ8)
+
+    # Marriage Hearts
+    kb.add_clause(~J12, ~J13, PJ12, PJ13)
+    kb.add_clause(J12, ~PJ12)
+    kb.add_clause(J13, ~PJ12)
+    kb.add_clause(J12, ~PJ13)
+    kb.add_clause(J13, ~PJ13)
+
+    # Marriage Spades
+    kb.add_clause(~J17, ~J18, PJ17, PJ18)
+    kb.add_clause(J17, ~PJ17)
+    kb.add_clause(J18, ~PJ17)
+    kb.add_clause(J17, ~PJ18)
+    kb.add_clause(J18, ~PJ18)

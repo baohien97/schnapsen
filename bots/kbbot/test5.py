@@ -72,8 +72,7 @@ def general_information(kb):
 def strategy_knowledge(kb):
     # DEFINITION OF THE STRATEGY
     # Add clauses (This list is sufficient for this strategy)
-    # e.g PCJ is the strategy to play cheap jacks first, so all we need to model is all x PCJ(x) <-> CJ(x) (??????),
-    # In other words that the PCJ strategy should play a card when it is a cheap jack
+   
     #Jacks
     kb.add_clause(~CJ, PCJ)
     kb.add_clause(~DJ, PDJ)

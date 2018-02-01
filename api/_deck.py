@@ -212,7 +212,7 @@ class Deck:
     #Look into overloading this function as well
     # Generates a new deck based on a seed. If no seed is given, a random seed in generated.
     @staticmethod
-    def generate(id=None, project):
+    def generate(id=None, project= True):
 
         if id is None:
             id = random.randint(0, 100000)
@@ -253,6 +253,7 @@ class Deck:
             trump_queen_state = ""
             trump_queen_index = 0
 
+            #determine trump king and queen properties (see above)
             for j in range(20):
                 if shuffled_cards[j] / 5 == trump_suit and shuffled_cards[j] % 5 == 2:
                     trump_king_state = card_state[shuffled_cards[j]]
@@ -262,24 +263,43 @@ class Deck:
                     trump_queen_index = j
 
             if trump_king_index != 0:  # only if king is not open trump card under stock
-
+                # if trump king is already on hand
                 if trump_king_state == "P1H":
                     pass
+                # if trump king is on opponent's hand
                 elif trump_king_state == "P2H":
                     card_state[shuffled_cards[10]] = "P2H"
                     card_state[shuffled_cards[trump_king_index]] = "P1H"
+                    p1_perspective[shuffled_cards[10]] = "U"
+                    p2_perspective[shuffled_cards[10]] = "P2H"
+                    p1_perspective[shuffled_cards[trump_king_index]] = "P1H"
+                    p2_perspective[shuffled_cards[trump_king_index]] = "U"
+                # if trump king is on stock
                 else:
                     card_state[shuffled_cards[10]] = "S"
                     card_state[shuffled_cards[trump_king_index]] = "P1H"
+                    stock[trump_king_index] = shuffled_cards[10]
+                    p1_perspective[shuffled_cards[10]] = "U"
+                    p1_perspective[shuffled_cards[trump_king_index]] = "P1H"
             else:
+                #if trump queen is already on hand
                 if trump_queen_state == "P1H":
                     pass
+                # if trump queen is on opponent's hand
                 elif trump_queen_state == "P2H":
                     card_state[shuffled_cards[10]] = "P2H"
                     card_state[shuffled_cards[trump_queen_index]] = "P1H"
+                    p1_perspective[shuffled_cards[10]] = "U"
+                    p2_perspective[shuffled_cards[10]] = "P2H"
+                    p1_perspective[shuffled_cards[trump_queen_index]] = "P1H"
+                    p2_perspective[shuffled_cards[trump_queen_index]] = "U"
+                #if trump queen is on stock
                 else:
                     card_state[shuffled_cards[10]] = "S"
                     card_state[shuffled_cards[trump_queen_index]] = "P1H"
+                    stock[trump_queen_index] = shuffled_cards[10]
+                    p1_perspective[shuffled_cards[10]] = "U"
+                    p1_perspective[shuffled_cards[trump_queen_index]] = "P1H"
 
         return Deck(card_state, stock, p1_perspective, p2_perspective)
 
@@ -347,3 +367,21 @@ class Deck:
             self.__p1_perspective[index] = c_state
         else:
             self.__p2_perspective[index] = c_state
+
+
+	def convert_to_json(self):
+		return {"card_state":self.__card_state, "p1_perspective":self.__p1_perspective, "p2_perspective":self.__p2_perspective, "trick":self.__trick, "stock":self.__stock, "trump_suit":self.__trump_suit, "signature":self.__signature}
+
+	@staticmethod
+	def load_from_json(dict):
+		deck = Deck(dict['card_state'], dict['stock'], dict['p1_perspective'], dict['p2_perspective'])
+		deck.__signature = dict['signature']
+		deck.__trick = dict['trick']
+
+		return deck
+
+	def __eq__(self, o):
+		return self.__card_state == o.__card_state and self.__p1_perspective == o.__p1_perspective and self.__p2_perspective == o.__p2_perspective and self.__trick == o.__trick and self.__stock == o.__stock and self.__trump_suit == o.__trump_suit and self.__signature == o.__signature
+
+	def __ne__(self, o):
+		return not (self.__card_state == o.__card_state and self.__p1_perspective == o.__p1_perspective and self.__p2_perspective == o.__p2_perspective and self.__trick == o.__trick and self.__stock == o.__stock and self.__trump_suit == o.__trump_suit and self.__signature == o.__signature)

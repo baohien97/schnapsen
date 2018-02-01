@@ -68,6 +68,8 @@ kb.add_clause(SK)
 # In other words that the PJ strategy should play a card when it is a jack
 # Add here other strategies
 
+#CHEAP CARD STRATEGY
+
 kb.add_clause((~CQ, ~CK),(CQ, CK)) and
 
 kb.add_clause(CQ)
