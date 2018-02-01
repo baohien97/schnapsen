@@ -11,7 +11,7 @@ from sklearn.externals import joblib
 
 # Path of the model we will use. If you make a model
 # with a different name, point this line to its path.
-DEFAULT_MODEL = os.path.dirname(os.path.realpath(__file__)) + '/model.pkl'
+DEFAULT_MODEL = os.path.dirname(os.path.realpath(__file__)) + '/model-rand.pkl'
 
 class Bot:
 
@@ -118,17 +118,17 @@ def features(state):
     perspective = [card if card != 'P2W' else 4 for card in perspective] # 4 = P2W
 
     feature_set += perspective
-
+    
     # get current user's hand
     player1_hand = state.hand()
-    
+    '''
     # get all legal moves
     player1_moves = state.moves()
     player1_next_state = []
 
     # get current user's next possible states
     for move in player1_moves: 
-        player1_next_state.append(state.next(move))
+        player1_next_state.append(state.next(move))'''
 
     # likelihood of getting a trump marriage based on current perspective
 
