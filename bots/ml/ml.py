@@ -11,7 +11,7 @@ from sklearn.externals import joblib
 
 # Path of the model we will use. If you make a model
 # with a different name, point this line to its path.
-DEFAULT_MODEL = os.path.dirname(os.path.realpath(__file__)) + '/modelproject.pkl'
+DEFAULT_MODEL = os.path.dirname(os.path.realpath(__file__)) + '/model.pkl'
 
 class Bot:
 
@@ -134,28 +134,31 @@ def features(state):
 
     likelihood = 0
 
-    unknowns_cards = [perspective.index(card) if card == -1 for card in perspective]
-    known_cards = [perspective.index(card) if card != 0 and card != -1 for card in perspective] 
+    unknown_cards = [ind for ind,card in enumerate(perspective) if card == -1]
+
+    known_cards = [ind for ind,card in enumerate(perspective) if card != 0 and card != -1] 
     trump_suit = state.get_trump_suit()
     
     trump_k_or_q = 0
-    trump_partner = ""
+    #trump_partner = 
     for i in player1_hand:
         if (Deck.get_rank(card) == 'K' or Deck.get_rank(card) == 'Q') and Deck.get_suit(card) == trump_suit:
             trump_k_or_q += 1
-
+    
+    trump_partner = -1
     if trump_k_or_q != 2:
         if (Deck.get_rank(card) == 'K' or Deck.get_rank(card) == 'Q') and Deck.get_suit(card) == trump_suit:
             trump_partner = int(card)
-    
-    for card in known_cards:
-        if card == trump_partner + 1:
-            likelihood = 0
-    for card in unknowns_cards:
-        if card = trump_partner + 1:
-            likelihood = float(1/len(unknown_cards))
+            for card in known_cards:
+                if card == trump_partner + 1:
+                    likelihood = 0
+            for card in unknown_cards:
+                if card == trump_partner + 1:
+                    likelihood = float(1/len(unknown_cards))
+        elif trump_k_or_q == 0:
+            likelihood = 0            
     feature_set.append(likelihood)
-    
+
     # Add player 1's points to feature set
     p1_points = state.get_points(1)
     feature_set.append(p1_points)
